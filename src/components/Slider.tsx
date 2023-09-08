@@ -8,16 +8,19 @@ const data = [
     id: 1,
     title: "always fresh & always crispy & always hot",
     image: "/slide1.png",
+    priority: false,
   },
   {
     id: 2,
     title: "we deliver your order wherever you are in NY",
     image: "/slide2.png",
+    priority: true,
   },
   {
     id: 3,
     title: "the best pizza to share with your family",
     image: "/slide3.jpg",
+    priority: false,
   },
 ];
 
@@ -48,8 +51,9 @@ export default function Slider() {
         <Image
           src={data[currentSlide].image}
           alt={data[currentSlide].title}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          priority={data[currentSlide].priority}
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover"
         />
       </div>

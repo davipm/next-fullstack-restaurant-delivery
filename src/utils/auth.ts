@@ -8,8 +8,8 @@ const prisma = new PrismaClient();
 declare module "next-auth" {
   interface Session {
     user: User & {
-      isAdmin:Boolean
-    }
+      isAdmin: Boolean;
+    };
   }
 }
 
@@ -19,10 +19,10 @@ declare module "next-auth/jwt" {
   }
 }
 
-const authOptions: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: 'jwt'
+    strategy: "jwt",
   },
   providers: [
     GoogleProvider({
@@ -33,20 +33,20 @@ const authOptions: NextAuthOptions = {
   callbacks: {
     async session({ token, session }) {
       if (token) {
-        session.user.isAdmin = token.isAdmin
+        session.user.isAdmin = token.isAdmin;
       }
       return session;
     },
     async jwt({ token }) {
       const userInDb = await prisma.user.findUnique({
         where: {
-          email: token.email!
-        }
-      })
-      token.isAdmin = userInDb?.isAdmin!
-      return token
-    }
-  }
-}
+          email: token.email!,
+        },
+      });
+      token.isAdmin = userInDb?.isAdmin!;
+      return token;
+    },
+  },
+};
 
-export const getAuthSession = getServerSession(authOptions)
+export const getAuthSession = getServerSession(authOptions);
