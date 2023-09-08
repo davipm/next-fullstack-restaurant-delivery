@@ -1,16 +1,16 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function LoginPage() {
   const { status } = useSession();
-  const router = useRouter();
 
   if (status === "loading") return <p>Loading...</p>;
 
-  if (status === "authenticated") return router.push("/");
+  if (status === "authenticated") return redirect("/");
 
   return (
     <div className="p-4 h-[clac(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center">
@@ -25,6 +25,44 @@ export default function LoginPage() {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-cover"
           />
+        </div>
+
+        <div className="p-10 flex flex-col gap-8 md:w-1/2">
+          <h1 className="font-bold text-xl xl:text-3xl">Welcome</h1>
+          <p>Log into your account or create a new one using social buttons</p>
+          <button
+            className="flex items-center gap-4 p-4 ring-1 ring-orange-100 rounded-md"
+            onClick={() => signIn("google")}
+          >
+            <Image
+              src="/google.png"
+              alt="Google"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+            <span>Sign in with Google</span>
+          </button>
+          <button
+            className="flex items-center gap-4 p-4 ring-1 ring-orange-100 rounded-md"
+            onClick={() => signIn("google")}
+          >
+            <Image
+              src="/facebook.png"
+              alt="Google"
+              width={20}
+              height={20}
+              className="object-contain"
+            />
+            <span>Sign in with Facebook</span>
+          </button>
+          <p className="text-sm">
+            Have a problem?
+            <Link href="/" className="underline">
+              {" "}
+              Contact us
+            </Link>
+          </p>
         </div>
       </div>
     </div>
