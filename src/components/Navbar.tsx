@@ -7,7 +7,7 @@ import CartIcon from "@/components/CartIcon";
 
 export default function Navbar() {
   return (
-    <div className="h-12 text-red-500 p-4 flex items-center justify-between border-b-2 border-b-red-500 uppercase md:h-24 lg:px-20 xl:px-40">
+    <nav className="h-12 text-red-500 p-4 flex items-center justify-between border-b-2 border-b-red-500 uppercase md:h-24 lg:px-20 xl:px-40">
       <div className="hidden md:flex gap-4 flex-1">
         <Link href="/">Homepage</Link>
         <Link href="/menu">Menu</Link>
@@ -30,6 +30,6 @@ export default function Navbar() {
         <UserLinks />
         <CartIcon />
       </div>
-    </div>
+    </nav>
   );
 }

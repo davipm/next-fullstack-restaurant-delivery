@@ -16,7 +16,7 @@ export default async function Featured() {
   const products = await getProducts();
 
   return (
-    <div className="w-screen overflow-x-auto overflow-y-hidden text-red-500">
+    <section className="w-screen overflow-x-auto overflow-y-hidden text-red-500">
       <div className="w-max flex">
         {products?.map((item) => (
           <div
@@ -48,6 +48,6 @@ export default async function Featured() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

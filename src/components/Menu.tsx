@@ -19,7 +19,7 @@ export default function Menu() {
   const user = status === "authenticated";
 
   return (
-    <div>
+    <nav>
       <Image
         src={open ? "/close.png" : "/open.png"}
         alt=""
@@ -48,6 +48,6 @@ export default function Menu() {
           </Link>
         </div>
       )}
-    </div>
+    </nav>
   );
 }
