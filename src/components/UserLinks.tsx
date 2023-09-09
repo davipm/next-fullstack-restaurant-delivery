@@ -1,23 +1,20 @@
-"use client";
-
-import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import { getCurrentUser } from "@/utils/auth";
+import LogoutBtn from "@/components/LogoutBtn";
 
-export default function UserLinks() {
-  const { status } = useSession();
+export default async function UserLinks() {
+  const session = await getCurrentUser();
 
   return (
-    <div>
-      {status === "authenticated" ? (
+    <>
+      {session ? (
         <div>
           <Link href="/order">Order</Link>
-          <span className="ml-4 cursor-pointer" onClick={() => signOut()}>
-            Logout
-          </span>
+          <LogoutBtn />
         </div>
       ) : (
         <Link href="/login">Login</Link>
       )}
-    </div>
+    </>
   );
 }
