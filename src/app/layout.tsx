@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 
+import { Props } from "@/@types";
 import Notification from "@/components/Notification";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
@@ -16,11 +17,7 @@ export const metadata: Metadata = {
   description: "Best food",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={inter.className}>
