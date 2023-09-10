@@ -1,12 +1,11 @@
 import Image from "next/image";
+import api from "@/utils/service";
 import { Product } from "@/@types";
 
-async function getProducts(): Promise<Product[] | undefined> {
+async function getProducts() {
   try {
-    const response = await fetch("http://localhost:3000/api/products", {
-      cache: "no-cache",
-    });
-    return response.json();
+    const { data } = await api.get<Product[]>("/products");
+    return data;
   } catch (error) {
     console.error(error);
   }

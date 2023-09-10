@@ -1,12 +1,11 @@
 import Link from "next/link";
+import api from "@/utils/service";
 import { Categories } from "@/@types";
 
-async function getCategories(): Promise<Categories | undefined> {
+async function getCategories() {
   try {
-    const response = await fetch("http://localhost:3000/api/categories", {
-      cache: "no-cache",
-    });
-    return response.json();
+    const { data } = await api.get<Categories>("/categories");
+    return data;
   } catch (error) {
     console.error(error);
   }
