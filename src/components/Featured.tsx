@@ -7,7 +7,7 @@ async function getProducts() {
     const { data } = await api.get<Product[]>("/products");
     return data;
   } catch (error) {
-    console.error(error);
+    throw new Error("Got a error");
   }
 }
 

@@ -7,7 +7,7 @@ async function getCategories() {
     const { data } = await api.get<Categories>("/categories");
     return data;
   } catch (error) {
-    console.error(error);
+    throw new Error("Got a error");
   }
 }
 
