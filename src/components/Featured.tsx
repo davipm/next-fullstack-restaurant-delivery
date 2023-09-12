@@ -1,5 +1,10 @@
+"use client";
+
 import Image from "next/image";
 import api from "@/utils/service";
+import Link from "next/link";
+import { useQuery } from "@tanstack/react-query";
+
 import { Product } from "@/@types";
 
 async function getProducts() {
@@ -11,16 +16,28 @@ async function getProducts() {
   }
 }
 
-export default async function Featured() {
-  const products = await getProducts();
+export default function Featured() {
+  const products = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+
+  if (products.isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (products.isError) {
+    // @ts-ignore
+    return <span>Error: {products.error.message}</span>;
+  }
 
   return (
     <section className="w-screen overflow-x-auto overflow-y-hidden text-red-500">
       <div className="w-max flex">
-        {products?.map((item) => (
+        {products.data?.map((item) => (
           <div
             key={item.id}
-            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh]"
+            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh] overflow-hidden"
           >
             {item.img && (
               <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
@@ -40,9 +57,12 @@ export default async function Featured() {
               </h1>
               <p className="p-4 2xl:p-8">{item.desc}</p>
               <span className="text-xl font-bold">${item.price}</span>
-              <button className="bg-red-500 text-white p-2 rounded-md">
+              <Link
+                href={`/product/${item.id}`}
+                className="bg-red-500 text-white p-2 rounded-md"
+              >
                 Add to card
-              </button>
+              </Link>
             </div>
           </div>
         ))}
