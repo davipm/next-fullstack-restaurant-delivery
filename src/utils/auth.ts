@@ -46,6 +46,9 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
   },
+  pages: {
+    signIn: "/login",
+  },
 };
 
 export async function getCurrentUser() {
