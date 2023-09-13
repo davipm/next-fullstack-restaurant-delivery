@@ -1,17 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-
-import api from "@/utils/service";
-import { Product } from "@/@types";
-
-async function getByCategories(category: string) {
-  try {
-    const { data } = await api.get<Product[]>(`/products?cat=${category}`);
-    return data;
-  } catch (error) {
-    throw new Error("Error getting single Product");
-  }
-}
+import { useProducts } from "@/hooks";
 
 interface Props {
   params: {
@@ -19,8 +10,16 @@ interface Props {
   };
 }
 
-export default async function Category({ params }: Props) {
-  const products = await getByCategories(params.category);
+export default function Category({ params }: Props) {
+  const { data: products, status } = useProducts(params.category);
+
+  if (status === "loading") {
+    return <span>Loading...</span>;
+  }
+
+  if (status === "error") {
+    return <span>Error...</span>;
+  }
 
   return (
     <div className="flex flex-wrap text-red-500">

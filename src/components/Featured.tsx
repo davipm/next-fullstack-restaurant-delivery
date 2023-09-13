@@ -1,40 +1,25 @@
 "use client";
 
 import Image from "next/image";
-import api from "@/utils/service";
 import Link from "next/link";
-import { useQuery } from "@tanstack/react-query";
 
-import { Product } from "@/@types";
-
-async function getProducts() {
-  try {
-    const { data } = await api.get<Product[]>("/products");
-    return data;
-  } catch (error) {
-    throw new Error("Got a error");
-  }
-}
+import { useProducts } from "@/hooks";
 
 export default function Featured() {
-  const products = useQuery({
-    queryKey: ["products"],
-    queryFn: getProducts,
-  });
+  const { data: products, status } = useProducts();
 
-  if (products.isLoading) {
+  if (status === "loading") {
     return <span>Loading...</span>;
   }
 
-  if (products.isError) {
-    // @ts-ignore
-    return <span>Error: {products.error.message}</span>;
+  if (status === "error") {
+    return <span>Error...</span>;
   }
 
   return (
     <section className="w-screen overflow-x-auto overflow-y-hidden text-red-500">
       <div className="w-max flex">
-        {products.data?.map((item) => (
+        {products.map((item) => (
           <div
             key={item.id}
             className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh] overflow-hidden"
