@@ -19,8 +19,8 @@ export default function DeleteButton({ id }: Props) {
 
   const handleMutation = useMutation({
     mutationFn: (id: number) => api.delete(`/products/${id}`),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["products"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ["products"] });
 
       router.push("/menu");
       toast("The product has been deleted!");
