@@ -5,7 +5,7 @@ import api from "@/utils/service";
 
 export function useProducts(category?: string) {
   return useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", category],
     queryFn: async () => {
       try {
         const { data } = await api.get<Product[]>(

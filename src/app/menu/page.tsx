@@ -1,43 +1,57 @@
+"use client";
+
 import Link from "next/link";
-import cx from "classnames";
+import Image from "next/image";
+import { useProducts } from "@/hooks";
+import LoadingSpinner from "@/components/Loading";
 
-import api from "@/utils/service";
-import { Categories } from "@/@types";
-
-async function getCategories() {
-  try {
-    const { data } = await api.get<Categories[]>("/categories");
-    return data;
-  } catch (error) {
-    throw new Error("Got a error");
-  }
+interface Props {
+  params: {
+    category: string;
+  };
+  searchParams: {
+    cat: string;
+  };
 }
 
-export default async function MenuPage() {
-  const categories = await getCategories();
+export default function Category({ params, searchParams }: Props) {
+  const { data: products, status } = useProducts(searchParams.cat);
+
+  if (!searchParams.cat) return null;
+
+  if (status === "loading") {
+    return <LoadingSpinner />;
+  }
+
+  if (status === "error") {
+    return <span>Error...</span>;
+  }
 
   return (
-    <div className="p-4 lg:px-20 xl:px-40 h-[calc(80vh-6rem)] md:h-[clac(80vh-9rem)] flex flex-col md:flex-row items-center">
-      {categories?.map((category) => (
+    <div className="flex flex-wrap text-red-500">
+      {products.map((product) => (
         <Link
-          href={`/menu/${category.slug}`}
-          key={category.id}
-          className="w-full h-1/3 bg-cover p-8 md:h-1/2"
-          style={{ backgroundImage: `url(${category.img})` }}
+          href={`/product/${product.id}`}
+          key={product.id}
+          className="w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group odd:bg-fuchsia-50"
         >
-          <div className={`text-${category.color} w-1/2`}>
-            <h1>{category.title}</h1>
-            <p>{category.desc}</p>
+          {product.img && (
+            <div className="relative h-[80%]">
+              <Image
+                src={product.img}
+                alt={product.title}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-contain"
+              />
+            </div>
+          )}
 
-            <button
-              className={cx(
-                `mt-5 hidden md:block py-2 px-4 rounded-md`,
-                category.color === "bg-black"
-                  ? "text-white bg-black"
-                  : "text-red-500 bg-white",
-              )}
-            >
-              Explore
+          <div className="flex items-center justify-between font-bold">
+            <h1 className="text-2xl uppercase p-2">{product.title}</h1>
+            <h2 className="group-hover:hidden text-xl">{product.price}</h2>
+            <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">
+              Add to Cart
             </button>
           </div>
         </Link>
