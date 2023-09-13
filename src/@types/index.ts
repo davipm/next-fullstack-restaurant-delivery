@@ -12,7 +12,7 @@ export type Categories = {
   desc?: string;
   img?: string;
   color: string;
-}[];
+};
 
 export interface SessionInterface extends Session {
   user: User & {

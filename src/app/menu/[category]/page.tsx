@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useProducts } from "@/hooks";
+import LoadingSpinner from "@/components/Loading";
 
 interface Props {
   params: {
@@ -14,7 +15,7 @@ export default function Category({ params }: Props) {
   const { data: products, status } = useProducts(params.category);
 
   if (status === "loading") {
-    return <span>Loading...</span>;
+    return <LoadingSpinner />;
   }
 
   if (status === "error") {
