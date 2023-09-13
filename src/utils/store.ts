@@ -17,7 +17,7 @@ export const useCartStore = create(
         totalItems: INITIAL_STATE.totalItems,
         totalPrice: INITIAL_STATE.totalPrice,
 
-        addToCart(item) {
+        addingNewProductToCart(item) {
           const products = get().products;
           const productInState = products.find(
             (product) => product.id === item.id,

@@ -11,24 +11,27 @@ interface Props {
 }
 
 export default function Price({ product }: Props) {
-  const { addToCart } = useCartStore();
+  const { addingNewProductToCart } = useCartStore();
 
-  const [total, setTotal] = useState(product.price);
-  const [quantity, setQuantity] = useState(1);
-  const [selected, setSelected] = useState(0);
+  const [item, setItem] = useState({
+    total: product.price,
+    quantity: 1,
+    selected: 0,
+  });
 
   const handleCart = () => {
-    addToCart({
+    const cart = {
       id: product.id,
       title: product.title,
       img: product.img,
-      price: total,
+      price: item.total,
       ...(product.options?.length && {
-        optionTitle: product.options[selected].title,
+        optionTitle: product.options[item.selected].title,
       }),
-      quantity: quantity,
-    });
+      quantity: item.quantity,
+    };
 
+    addingNewProductToCart(cart);
     toast.success("The product added to the cart!");
   };
 
@@ -38,26 +41,29 @@ export default function Price({ product }: Props) {
 
   useEffect(() => {
     if (product.options?.length) {
-      setTotal(
-        quantity * product.price + product.options[selected].additionalPrice,
-      );
+      setItem({
+        ...item,
+        quantity:
+          product.price + product.options[item.selected].additionalPrice,
+      });
     }
-  }, [product.options, product.price, quantity, selected]);
+  }, [item, product.options, product.price]);
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">${total}</h2>
+      <h2 className="text-2xl font-bold">${item.total}</h2>
 
       <div className="flex gap-4">
         {product.options?.length &&
           product.options.map((option, index) => (
             <button
               key={option.title}
-              onClick={() => setSelected(index)}
+              onClick={() => setItem({ ...item, selected: index })}
               className="min-w-[6rem] p-2 ring-1 ring-red-400 rounded-md"
               style={{
-                background: selected === index ? "rgb(248 113 113)" : "white",
-                color: selected === index ? "white" : "red",
+                background:
+                  item.selected === index ? "rgb(248 113 113)" : "white",
+                color: item.selected === index ? "white" : "red",
               }}
             >
               {option.title}
@@ -70,15 +76,25 @@ export default function Price({ product }: Props) {
           <span>Quantity</span>
           <div className="flex gap-4 items-center">
             <button
-              onClick={() => setQuantity((prev) => (prev > 1 ? prev - 1 : 1))}
+              onClick={() =>
+                setItem((prevState) => ({
+                  ...prevState,
+                  quantity: prevState.quantity > 1 ? prevState.quantity - 1 : 1,
+                }))
+              }
             >
               {"<"}
             </button>
 
-            <span>{quantity}</span>
+            <span>{item.quantity}</span>
 
             <button
-              onClick={() => setQuantity((prev) => (prev < 9 ? prev + 1 : 9))}
+              onClick={() =>
+                setItem((prevState) => ({
+                  ...prevState,
+                  quantity: prevState.quantity < 9 ? prevState.quantity + 1 : 9,
+                }))
+              }
             >
               {">"}
             </button>
