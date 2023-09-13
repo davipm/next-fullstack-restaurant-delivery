@@ -1,4 +1,6 @@
 import Link from "next/link";
+import cx from "classnames";
+
 import api from "@/utils/service";
 import { Categories } from "@/@types";
 
@@ -26,10 +28,14 @@ export default async function MenuPage() {
           <div className={`text-${category.color} w-1/2`}>
             <h1>{category.title}</h1>
             <p>{category.desc}</p>
+
             <button
-              className={`mt-5 hidden md:block ${
-                category.color === "bg-black" ? "text-white" : "text-red-500"
-              } ${category.color} py-2 px-4 rounded-md`}
+              className={cx(
+                `mt-5 hidden md:block py-2 px-4 rounded-md`,
+                category.color === "bg-black"
+                  ? "text-white bg-black"
+                  : "text-red-500 bg-white",
+              )}
             >
               Explore
             </button>
