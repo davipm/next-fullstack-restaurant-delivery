@@ -41,7 +41,7 @@ export default function DeleteButton({ id }: Props) {
   return (
     <button
       onClick={() => handleMutation.mutate(id)}
-      className="bg-red-400 hover:bg-red-500 text-white p-2 rounded-full ml-6 transition ease-in-out"
+      className="bg-blue-400 hover:bg-blue-500 text-white p-2 rounded-full ml-6 transition ease-in-out"
     >
       <Image src="/delete.png" alt="Delete" width={20} height={20} />
     </button>

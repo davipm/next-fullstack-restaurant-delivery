@@ -17,7 +17,7 @@ export default function Featured() {
   }
 
   return (
-    <section className="w-screen overflow-x-auto overflow-y-hidden text-red-500">
+    <section className="w-screen overflow-x-auto overflow-y-hidden text-gray-500">
       <div className="w-max flex">
         {products.map((item) => (
           <div
@@ -44,7 +44,7 @@ export default function Featured() {
               <span className="text-xl font-bold">${item.price}</span>
               <Link
                 href={`/product/${item.id}`}
-                className="bg-red-500 text-white p-2 rounded-md"
+                className="bg-blue-500 text-white p-2 rounded-md"
               >
                 Add to card
               </Link>

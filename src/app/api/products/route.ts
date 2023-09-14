@@ -1,5 +1,7 @@
+import { NextRequest } from "next/server";
+
 import prisma from "@/utils/connect";
-import { NextRequest, NextResponse as res } from "next/server";
+import methods from "@/classes";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -12,18 +14,15 @@ export async function GET(req: NextRequest) {
       },
     });
 
+    if (!products) return methods.sendNotFound();
+
     const priceFormatted = products.map((product) => ({
       ...product,
       price: product.price.toFixed(2),
     }));
 
-    return res.json(priceFormatted, { status: 200 });
+    return methods.sendSuccess(priceFormatted);
   } catch (error) {
-    return res.json(
-      { message: "Something went wrong!", error },
-      {
-        status: 500,
-      },
-    );
+    return methods.sendInternalServerError();
   }
 }

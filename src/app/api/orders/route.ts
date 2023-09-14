@@ -2,39 +2,30 @@ import { NextRequest, NextResponse as res } from "next/server";
 
 import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
+import methods from "@/classes";
 
 export async function GET() {
   const session = await getCurrentUser();
 
   if (session) {
     try {
+      if (session.user.isAdmin) {
+        const orders = await prisma.order.findMany();
+        return methods.sendSuccess(orders);
+      }
+
       const orders = await prisma.order.findMany({
         where: {
           userEmail: session.user.email!,
         },
       });
 
-      if (session.user.isAdmin) {
-        const orders = await prisma.order.findMany();
-        return res.json(orders, { status: 200 });
-      }
-
-      return res.json(orders, { status: 200 });
+      return methods.sendSuccess(orders);
     } catch (error) {
-      return res.json(
-        { message: "Something went wrong!" },
-        {
-          status: 500,
-        },
-      );
+      return methods.sendInternalServerError();
     }
   } else {
-    return res.json(
-      { message: "You are not authenticated!", status: 401 },
-      {
-        status: 401,
-      },
-    );
+    return methods.sendError(401, "You are not authenticated!");
   }
 }
 
@@ -50,19 +41,9 @@ export async function POST(req: NextRequest) {
 
       return res.json(order, { status: 201 });
     } catch (error) {
-      return res.json(
-        { message: "Something went wrong!" },
-        {
-          status: 500,
-        },
-      );
+      return methods.sendInternalServerError();
     }
   } else {
-    return res.json(
-      { message: "You are not authenticated!" },
-      {
-        status: 401,
-      },
-    );
+    return methods.sendError(401, "You are not authenticated!");
   }
 }

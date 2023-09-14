@@ -29,12 +29,12 @@ export default function Category({ params, searchParams }: Props) {
   }
 
   return (
-    <div className="flex flex-wrap text-red-500">
+    <div className="flex flex-wrap text-gray-500">
       {products.map((product) => (
         <Link
           href={`/product/${product.id}`}
           key={product.id}
-          className="w-full h-[60vh] border-r-2 border-b-2 border-red-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group odd:bg-fuchsia-50"
+          className="w-full h-[60vh] border-r-2 border-b-2 border-blue-500 sm:w-1/2 lg:w-1/3 p-4 flex flex-col justify-between group odd:bg-fuchsia-50"
         >
           {product.img && (
             <div className="relative h-[80%]">
@@ -53,7 +53,7 @@ export default function Category({ params, searchParams }: Props) {
             <h2 className="group-hover:hidden text-xl">
               {formatToMoney(product.price)}
             </h2>
-            <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">
+            <button className="hidden group-hover:block uppercase bg-blue-500 text-white p-2 rounded-md">
               Add to Cart
             </button>
           </div>

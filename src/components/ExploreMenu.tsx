@@ -41,7 +41,7 @@ export default function ExploreMenu({ categories }: Props) {
                 `mt-5 hidden md:block py-2 px-4 rounded-md`,
                 category.color === "bg-black"
                   ? "text-white bg-black"
-                  : "text-red-500 bg-white",
+                  : "text-blue-500 bg-white",
               )}
             >
               Explore

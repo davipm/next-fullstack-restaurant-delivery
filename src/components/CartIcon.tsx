@@ -28,7 +28,7 @@ export default function CartIcon() {
       </div>
 
       {session?.user.isAdmin && (
-        <Link href="/add" className="p-1 bg-red-500 text-white rounded-md">
+        <Link href="/add" className="p-1 bg-blue-500 text-white rounded-md">
           Add product
         </Link>
       )}

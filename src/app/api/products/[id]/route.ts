@@ -1,6 +1,7 @@
 import prisma from "@/utils/connect";
-import { NextRequest, NextResponse as res } from "next/server";
+import { NextRequest } from "next/server";
 import { getCurrentUser } from "@/utils/auth";
+import methods from "@/classes";
 
 interface Params {
   params: {
@@ -18,14 +19,13 @@ export async function GET(req: NextRequest, { params }: Params) {
       },
     });
 
-    return res.json(product, { status: 200 });
+    if (!product) {
+      return methods.sendNotFound("No Products with this ID");
+    }
+
+    return methods.sendSuccess(product);
   } catch (error) {
-    return res.json(
-      { message: "Something went wrong!", error },
-      {
-        status: 500,
-      },
-    );
+    return methods.sendInternalServerError();
   }
 }
 
@@ -35,25 +35,21 @@ export async function DELETE(req: NextRequest, { params }: Params) {
 
   try {
     if (session.user.isAdmin) {
-      await prisma.product.delete({
+      const product = await prisma.product.delete({
         where: {
           id,
         },
       });
 
-      return res.json(
-        { message: "Product has been deleted!" },
-        { status: 200 },
-      );
+      if (!product) {
+        return methods.sendNotFound("No Products found with this ID");
+      }
+
+      return methods.sendSuccess({ message: "Product deleted!" });
     }
 
-    return res.json({ message: "You are not allowed!" }, { status: 403 });
+    return methods.sendError(403, "You are not allowed!");
   } catch (error) {
-    return res.json(
-      { message: "Something went wrong!", error },
-      {
-        status: 500,
-      },
-    );
+    return methods.sendInternalServerError();
   }
 }
