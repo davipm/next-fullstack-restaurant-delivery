@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useProducts } from "@/hooks";
 import LoadingSpinner from "@/components/Loading";
+import { formatToMoney } from "@/utils/helpers";
 
 interface Props {
   params: {
@@ -49,7 +50,9 @@ export default function Category({ params, searchParams }: Props) {
 
           <div className="flex items-center justify-between font-bold">
             <h1 className="text-2xl uppercase p-2">{product.title}</h1>
-            <h2 className="group-hover:hidden text-xl">{product.price}</h2>
+            <h2 className="group-hover:hidden text-xl">
+              {formatToMoney(product.price)}
+            </h2>
             <button className="hidden group-hover:block uppercase bg-red-500 text-white p-2 rounded-md">
               Add to Cart
             </button>

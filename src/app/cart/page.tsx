@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import api from "@/utils/service";
 import { useCartStore } from "@/utils/store";
 import { CartItemType } from "@/@types";
+import { formatToMoney } from "@/utils/helpers";
 
 interface Props {
   products: CartItemType[];
@@ -90,7 +91,7 @@ export default function Page() {
               <span>{product.optionTitle}</span>
             </div>
 
-            <h2 className="font-bold">{product.price}</h2>
+            <h2 className="font-bold">{formatToMoney(product.price)}</h2>
 
             <span
               className="cursor-pointer"
@@ -105,7 +106,7 @@ export default function Page() {
       <div className="h-1/2 p-4 bg-fuchsia-50 flex flex-col gap-4 justify-center lg:h-full lg:w-1/3 2xl:w-1/2 lg:px-20 xl:px-40 2xl:text-xl 2xl:gap-6">
         <div className="flex justify-between">
           <span>Subtotal ({totalItems} items)</span>
-          <span>${totalItems}</span>
+          <span>{formatToMoney(totalPrice)}</span>
         </div>
         <div className="flex justify-between">
           <span>Service Cost</span>
@@ -118,7 +119,7 @@ export default function Page() {
         <hr className="my-2" />
         <div className="flex justify-between">
           <span>TOTAL(INCL. VAT)</span>
-          <span className="font-bold">{totalPrice}</span>
+          <span className="font-bold">{formatToMoney(totalPrice)}</span>
         </div>
 
         <button

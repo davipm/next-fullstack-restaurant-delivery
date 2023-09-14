@@ -14,7 +14,7 @@ export default function Price({ product }: Props) {
   const { addingNewProductToCart } = useCartStore();
 
   const [item, setItem] = useState({
-    total: product.price,
+    total: parseFloat(product.price),
     quantity: 1,
     selected: 0,
   });
@@ -44,7 +44,8 @@ export default function Price({ product }: Props) {
       setItem({
         ...item,
         quantity:
-          product.price + product.options[item.selected].additionalPrice,
+          parseFloat(product.price) +
+          product.options[item.selected].additionalPrice,
       });
     }
   }, [item, product.options, product.price]);

@@ -28,7 +28,7 @@ export type Product = {
   title: string;
   desc?: string;
   img?: string;
-  price: number;
+  price: string;
   options?: { title: string; additionalPrice: number }[];
 };
 
@@ -50,4 +50,14 @@ export type CartType = {
 export type ActionTypes = {
   addingNewProductToCart: (item: CartItemType) => void;
   removeFromCart: (item: CartItemType) => void;
+};
+
+export type OrderType = {
+  id: string;
+  userEmail: string;
+  price: number;
+  products: CartItemType[];
+  status: string;
+  createdAt: Date;
+  intent_id?: String;
 };
