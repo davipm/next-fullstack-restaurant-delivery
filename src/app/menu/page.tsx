@@ -29,7 +29,7 @@ export default function Category({ params, searchParams }: Props) {
   }
 
   return (
-    <div className="flex flex-wrap text-gray-500">
+    <section className="flex flex-wrap text-gray-500">
       {products.map((product) => (
         <Link
           href={`/product/${product.id}`}
@@ -59,6 +59,6 @@ export default function Category({ params, searchParams }: Props) {
           </div>
         </Link>
       ))}
-    </div>
+    </section>
   );
 }
