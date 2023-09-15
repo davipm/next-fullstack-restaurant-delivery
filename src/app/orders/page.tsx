@@ -54,6 +54,7 @@ export default function Orders() {
               <td className="hidden md:block py-6 px-1">
                 {order.products[0].title}
               </td>
+              {/* TODO: create admin section */}
             </tr>
           ))}
         </tbody>
