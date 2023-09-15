@@ -39,7 +39,7 @@ export default function ExploreMenu({ categories }: Props) {
               onClick={() => handleUpdateParams(category.slug)}
               className={cx(
                 `mt-5 hidden md:block py-2 px-4 rounded-md`,
-                category.color === "bg-black"
+                category.color === "black"
                   ? "text-white bg-black"
                   : "text-blue-500 bg-white",
               )}
