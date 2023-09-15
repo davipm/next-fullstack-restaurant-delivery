@@ -4,9 +4,9 @@ class HttpMethodHandler {
   // private static readonly DEFAULT_SUCCESS_MESSAGE = "Request successful";
   private static readonly DEFAULT_ERROR_MESSAGE = "An error occurred";
 
-  static sendSuccess(data?: unknown) {
+  static sendSuccess(data?: unknown, statusCode?: number) {
     // const responseMessage = message || this.DEFAULT_SUCCESS_MESSAGE;
-    return res.json(data, { status: 200 });
+    return res.json(data, { status: statusCode || 200 });
   }
 
   static sendError(statusCode: number, message?: string) {

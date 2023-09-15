@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         data: body,
       });
 
-      return res.json(order, { status: 201 });
+      return methods.sendSuccess(order, 201);
     } catch (error) {
       return methods.sendInternalServerError();
     }
