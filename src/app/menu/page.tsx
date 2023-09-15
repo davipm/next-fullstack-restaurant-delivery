@@ -1,10 +1,12 @@
-"use client";
+// "use client";
 
 import Link from "next/link";
 import Image from "next/image";
-import { useProducts } from "@/hooks";
-import LoadingSpinner from "@/components/Loading";
+// import { useProducts } from "@/hooks";
+// import LoadingSpinner from "@/components/Loading";
 import { formatToMoney } from "@/utils/helpers";
+import api from "@/utils/service";
+import { Product } from "@/@types";
 
 interface Props {
   params: {
@@ -15,18 +17,28 @@ interface Props {
   };
 }
 
-export default function Category({ params, searchParams }: Props) {
-  const { data: products, status } = useProducts(searchParams.cat);
-
-  if (!searchParams.cat) return null;
-
-  if (status === "loading") {
-    return <LoadingSpinner />;
+async function getProductsByCategory(category: string) {
+  try {
+    const { data } = await api.get<Product[]>(`/products?cat=${category}`);
+    return data;
+  } catch (error) {
+    throw new Error("Error trying get products");
   }
+}
 
-  if (status === "error") {
-    return <span>Error...</span>;
-  }
+export default async function Category({ params, searchParams }: Props) {
+  const products = await getProductsByCategory(searchParams.cat);
+  // const { data: products, status } = useProducts(searchParams.cat);
+  //
+  // if (!searchParams.cat) return null;
+  //
+  // if (status === "loading") {
+  //   return <LoadingSpinner />;
+  // }
+  //
+  // if (status === "error") {
+  //   return <span>Error...</span>;
+  // }
 
   return (
     <section className="flex flex-wrap text-gray-500">
