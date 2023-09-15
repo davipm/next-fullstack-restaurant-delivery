@@ -1,20 +1,20 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
-import { useProducts } from "@/hooks";
+import api from "@/utils/service";
+import { Product } from "@/@types";
 
-export default function Featured() {
-  const { data: products, status } = useProducts();
-
-  if (status === "loading") {
-    return <span>Loading...</span>;
+async function getProductsFeatured() {
+  try {
+    const { data } = await api.get<Product[]>(`/products`);
+    return data;
+  } catch (error) {
+    throw new Error("Error trying get products");
   }
+}
 
-  if (status === "error") {
-    return <span>Error...</span>;
-  }
+export default async function Featured() {
+  const products = await getProductsFeatured();
 
   return (
     <section className="w-screen overflow-x-auto overflow-y-hidden text-gray-500">
