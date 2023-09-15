@@ -1,16 +1,12 @@
-"use client";
-
-import { signIn, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
+import { getCurrentUser } from "@/utils/auth";
+import LoginForm from "@/components/LoginForm";
 
-export default function LoginPage() {
-  const { status } = useSession();
+export default async function LoginPage() {
+  const session = await getCurrentUser();
 
-  if (status === "loading") return <p>Loading...</p>;
-
-  if (status === "authenticated") return redirect("/");
+  if (session) return redirect("/");
 
   return (
     <div className="p-4 h-[clac(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center">
@@ -30,39 +26,7 @@ export default function LoginPage() {
         <div className="p-10 flex flex-col gap-8 md:w-1/2">
           <h1 className="font-bold text-xl xl:text-3xl">Welcome</h1>
           <p>Log into your account or create a new one using social buttons</p>
-          <button
-            className="flex items-center gap-4 p-4 ring-1 ring-orange-100 rounded-md"
-            onClick={() => signIn("google")}
-          >
-            <Image
-              src="/google.png"
-              alt="Google"
-              width={20}
-              height={20}
-              className="object-contain"
-            />
-            <span>Sign in with Google</span>
-          </button>
-          <button
-            className="flex items-center gap-4 p-4 ring-1 ring-orange-100 rounded-md"
-            onClick={() => signIn("google")}
-          >
-            <Image
-              src="/facebook.png"
-              alt="Google"
-              width={20}
-              height={20}
-              className="object-contain"
-            />
-            <span>Sign in with Facebook</span>
-          </button>
-          <p className="text-sm">
-            Have a problem?
-            <Link href="/" className="underline">
-              {" "}
-              Contact us
-            </Link>
-          </p>
+          <LoginForm />
         </div>
       </div>
     </div>
