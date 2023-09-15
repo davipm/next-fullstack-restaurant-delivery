@@ -1,17 +1,11 @@
-// "use client";
-
 import Link from "next/link";
 import Image from "next/image";
-// import { useProducts } from "@/hooks";
-// import LoadingSpinner from "@/components/Loading";
-import { formatToMoney } from "@/utils/helpers";
+
 import api from "@/utils/service";
+import { formatToMoney } from "@/utils/helpers";
 import { Product } from "@/@types";
 
 interface Props {
-  params: {
-    category: string;
-  };
   searchParams: {
     cat: string;
   };
@@ -26,19 +20,8 @@ async function getProductsByCategory(category: string) {
   }
 }
 
-export default async function Category({ params, searchParams }: Props) {
+export default async function Category({ searchParams }: Props) {
   const products = await getProductsByCategory(searchParams.cat);
-  // const { data: products, status } = useProducts(searchParams.cat);
-  //
-  // if (!searchParams.cat) return null;
-  //
-  // if (status === "loading") {
-  //   return <LoadingSpinner />;
-  // }
-  //
-  // if (status === "error") {
-  //   return <span>Error...</span>;
-  // }
 
   return (
     <section className="flex flex-wrap text-gray-500">
