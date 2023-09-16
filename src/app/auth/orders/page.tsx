@@ -1,7 +1,6 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import api from "@/utils/service";
 import { OrderType } from "@/@types";
@@ -15,7 +14,7 @@ import { toast } from "react-toastify";
 export default function Orders() {
   const queryClient = useQueryClient();
 
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const [orderStatus, setOrderStatus] = useState("");
 
@@ -49,8 +48,6 @@ export default function Orders() {
     e.preventDefault();
     mutation.mutate({ id, status: orderStatus });
   }
-
-  if (status === "unauthenticated") redirect("/");
 
   if (isLoading) return <LoadingSpinner />;
 
