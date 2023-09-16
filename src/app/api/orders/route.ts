@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse as res } from "next/server";
+import { NextRequest } from "next/server";
 
 import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
   if (session) {
     try {
       const body = await req.json();
+
       const order = await prisma.order.create({
         data: body,
       });
