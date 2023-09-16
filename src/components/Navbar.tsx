@@ -27,6 +27,7 @@ export default function Navbar() {
           <Image src="/phone.png" alt="" width={20} height={20} />
           <span>123 456 78</span>
         </div>
+
         <UserLinks />
         <CartIcon />
       </div>

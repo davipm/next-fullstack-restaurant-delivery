@@ -4,7 +4,7 @@ import prisma from "@/utils/connect";
 import methods from "@/classes";
 
 export async function GET(req: NextRequest) {
-  const cat = req.nextUrl.searchParams.get('cat');
+  const cat = req.nextUrl.searchParams.get("cat");
 
   try {
     const products = await prisma.product.findMany({
@@ -21,6 +21,20 @@ export async function GET(req: NextRequest) {
     }));
 
     return methods.sendSuccess(priceFormatted);
+  } catch (error) {
+    return methods.sendInternalServerError();
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json();
+
+    const product = await prisma.product.create({
+      data: body,
+    });
+
+    return methods.sendSuccess(product, 201);
   } catch (error) {
     return methods.sendInternalServerError();
   }

@@ -9,7 +9,7 @@ export default async function UserLinks() {
     <>
       {session ? (
         <div>
-          <Link href="/orders">Orders</Link>
+          <Link href="/auth/orders">Orders</Link>
           <LogoutBtn />
         </div>
       ) : (

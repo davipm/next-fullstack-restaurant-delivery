@@ -38,7 +38,7 @@ export default function Menu() {
           ))}
 
           <Link
-            href={user ? "/orders" : "/login"}
+            href={user ? "/auth/orders" : "/login"}
             onClick={() => setOpen(false)}
           >
             {user ? "Orders" : "Login"}
