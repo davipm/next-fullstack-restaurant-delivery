@@ -48,7 +48,18 @@ export const useCartStore = create(
           }
         },
 
-        removeFromCart(item) {},
+        removeFromCart(item) {
+          const products = get().products;
+          const filteredProducts = products.filter(
+            (product) => product.id !== item.id,
+          );
+
+          set((state) => ({
+            products: filteredProducts,
+            totalItems: state.totalItems - item.quantity,
+            totalPrice: state.totalPrice - item.price,
+          }));
+        },
       }),
       { name: "cart", skipHydration: true },
     ),
