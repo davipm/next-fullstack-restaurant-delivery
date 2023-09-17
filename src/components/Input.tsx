@@ -4,7 +4,7 @@ import Image from "next/image";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   label: string;
-  preview?: string;
+  preview?: string | null;
 }
 
 interface TextAreaProps extends InputHTMLAttributes<HTMLTextAreaElement> {
