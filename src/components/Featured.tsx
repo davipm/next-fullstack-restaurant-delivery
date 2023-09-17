@@ -17,12 +17,12 @@ export default async function Featured() {
   const products = await getProductsFeatured();
 
   return (
-    <section className="w-screen overflow-x-auto overflow-y-hidden text-gray-500">
-      <div className="w-max flex">
+    <section className="overflow-x-auto overflow-y-hidden text-gray-500">
+      <div className="flex flex-nowrap">
         {products.map((item) => (
           <div
             key={item.id}
-            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] xl:w-[33vw] xl:h-[90vh] overflow-hidden"
+            className="w-screen h-[60vh] flex flex-col items-center justify-around p-4 hover:bg-fuchsia-50 transition-all duration-300 md:w-[50vw] flex-grow-0 flex-shrink-0 xl:w-1/3 xl:h-[90vh] overflow-hidden"
           >
             {item.img && (
               <div className="relative flex-1 w-full hover:rotate-[60deg] transition-all duration-500">
