@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 
@@ -98,7 +98,7 @@ export default function Add() {
     setOption({ title: "", additionalPrice: "" });
   }
 
-  function onSubmit(event: { preventDefault: () => void }) {
+  function onSubmit(event: SyntheticEvent) {
     event.preventDefault();
     mutation.mutate({ ...form, options });
   }
