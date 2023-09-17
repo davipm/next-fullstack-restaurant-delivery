@@ -32,8 +32,8 @@ export default function ExploreMenu({ categories }: Props) {
           style={{ backgroundImage: `url(${category.img})` }}
         >
           <div className={`text-${category.color} w-1/2`}>
-            <h1>{category.title}</h1>
-            <p>{category.desc}</p>
+            <h1 className="uppercase font-bold text-3xl">{category.title}</h1>
+            <p className="text-sm my-8">{category.desc}</p>
 
             <button
               onClick={() => handleUpdateParams(category.slug)}
