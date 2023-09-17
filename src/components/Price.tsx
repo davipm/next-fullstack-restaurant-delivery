@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Product } from "@/@types";
 import { useCartStore } from "@/utils/store";
 import { toast } from "react-toastify";
+import { formatToMoney } from "@/utils/helpers";
 
 interface Props {
   product: Product;
@@ -14,7 +15,7 @@ export default function Price({ product }: Props) {
   const { addingNewProductToCart } = useCartStore();
 
   const [item, setItem] = useState({
-    total: parseFloat(product.price),
+    total: parseFloat(String(product.price)),
     quantity: 1,
     selected: 0,
   });
@@ -24,7 +25,7 @@ export default function Price({ product }: Props) {
       id: product.id,
       title: product.title,
       img: product.img,
-      price: item.total,
+      price: item.total * item.quantity,
       ...(product.options?.length && {
         optionTitle: product.options[item.selected].title,
       }),
@@ -40,19 +41,18 @@ export default function Price({ product }: Props) {
   }, []);
 
   useEffect(() => {
-    if (product.options?.length) {
-      setItem({
-        ...item,
-        quantity:
-          parseFloat(product.price) +
-          product.options[item.selected].additionalPrice,
-      });
-    }
-  }, [item, product.options, product.price]);
+    setItem({
+      ...item,
+      total: product.options?.length
+        ? item.quantity * product.price +
+          parseInt(String(product.options[item.selected].additionalPrice))
+        : item.quantity * product.price,
+    });
+  }, [product, item.selected, item.quantity]);
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">${item.total}</h2>
+      <h2 className="text-2xl font-bold">{formatToMoney(item.total)}</h2>
 
       <div className="flex gap-4">
         {product.options?.length &&

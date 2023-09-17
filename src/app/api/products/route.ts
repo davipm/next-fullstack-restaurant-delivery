@@ -15,12 +15,12 @@ export async function GET(req: NextRequest) {
 
     if (!products) return methods.sendNotFound();
 
-    const priceFormatted = products.map((product) => ({
-      ...product,
-      price: product.price.toFixed(2),
-    }));
+    // const priceFormatted = products.map((product) => ({
+    //   ...product,
+    //   price: product.price.toFixed(2),
+    // }));
 
-    return methods.sendSuccess(priceFormatted);
+    return methods.sendSuccess(products);
   } catch (error) {
     return methods.sendInternalServerError();
   }
@@ -29,6 +29,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    console.log({ body });
 
     const product = await prisma.product.create({
       data: body,
@@ -36,6 +37,7 @@ export async function POST(req: NextRequest) {
 
     return methods.sendSuccess(product, 201);
   } catch (error) {
+    console.log(error);
     return methods.sendInternalServerError();
   }
 }
