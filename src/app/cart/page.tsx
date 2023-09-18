@@ -51,7 +51,7 @@ export default function Page() {
       }),
     onSuccess: ({ id }) => {
       toast("The product has been deleted!");
-      router.push(`/pay/${id}`);
+      router.push(`/auth/pay/${id}`);
     },
     onError: () => {
       toast.error("Error creating checkout ");
