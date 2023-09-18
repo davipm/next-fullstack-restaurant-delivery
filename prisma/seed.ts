@@ -1,4 +1,4 @@
-import prisma from "@/utils/connect";
+import prisma from "../src/utils/connect";
 
 async function main() {
   const user = await prisma.user.upsert({
