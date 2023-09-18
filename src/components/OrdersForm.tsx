@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import api from "@/utils/service";
@@ -44,8 +44,8 @@ export default function OrdersForm() {
     },
   });
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>, id: string) {
-    e.preventDefault();
+  function handleSubmit(event: SyntheticEvent, id: string) {
+    event.preventDefault();
     mutation.mutate({ id, status: orderStatus });
   }
 

@@ -1,8 +1,9 @@
 "use client";
 
 import cx from "classnames";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Categories } from "@/@types";
+import { useCallback } from "react";
 
 interface Props {
   categories: Categories[];
@@ -10,17 +11,22 @@ interface Props {
 
 export default function ExploreMenu({ categories }: Props) {
   const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams()!;
 
-  function updateSearchParams(type: string, value: string) {
-    const { search, pathname } = window.location;
-    const searchParams = new URLSearchParams(search);
-    searchParams.set(type, value);
-    return `${pathname}?${searchParams.toString()}`;
-  }
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams);
+      params.set(name, value);
+
+      return params.toString();
+    },
+    [searchParams],
+  );
 
   function handleUpdateParams(slug: string) {
-    const newPathName = updateSearchParams("cat", `${slug}`);
-    router.push(newPathName, { scroll: false });
+    const newPathname = `${pathname}?${createQueryString("cat", `${slug}`)}`;
+    router.push(newPathname);
   }
 
   return (

@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 
 import api from "@/utils/service";
+import LoadingSpinner from "@/components/Loading";
 
 interface Props {
   id: number;
@@ -31,7 +32,7 @@ export default function DeleteButton({ id }: Props) {
   });
 
   if (status === "loading") {
-    return <div>loading...</div>;
+    return <LoadingSpinner />;
   }
 
   if (status === "unauthenticated" || !data?.user.isAdmin) {

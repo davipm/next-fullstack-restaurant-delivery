@@ -5,16 +5,12 @@ import LogoutBtn from "@/components/LogoutBtn";
 export default async function UserLinks() {
   const session = await getCurrentUser();
 
+  if (!session) return <Link href="/login">Login</Link>;
+
   return (
-    <>
-      {session ? (
-        <div>
-          <Link href="/auth/orders">Orders</Link>
-          <LogoutBtn />
-        </div>
-      ) : (
-        <Link href="/login">Login</Link>
-      )}
-    </>
+    <div>
+      <Link href="/auth/orders">Orders</Link>
+      <LogoutBtn />
+    </div>
   );
 }
