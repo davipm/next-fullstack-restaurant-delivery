@@ -1,8 +1,15 @@
 import prisma from "@/utils/connect";
 
 async function main() {
-  const response = await Promise.all([]);
-  console.log(response);
+  const user = await prisma.user.upsert({
+    where: { email: "davi.p.m94@gmail.com" },
+    update: {},
+    create: {
+      email: "davi.p.m94@gmail.com",
+      name: "avi",
+    },
+  });
+  console.log(user);
 }
 
 main()
