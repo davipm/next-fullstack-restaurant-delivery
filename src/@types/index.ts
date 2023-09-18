@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
 import { Session, User } from "next-auth";
+import { ReactNode } from "react";
 
 export interface Props {
   children: ReactNode;
