@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import api from "@/utils/service";
 import { Product } from "@/@types";
+import api from "@/utils/service";
 
 async function getProductsFeatured() {
   try {

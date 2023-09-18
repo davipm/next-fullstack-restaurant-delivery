@@ -1,15 +1,16 @@
 "use client";
 
-import { SyntheticEvent, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useSession } from "next-auth/react";
-import api from "@/utils/service";
-import { OrderType } from "@/@types";
-import { toast } from "react-toastify";
 import cx from "classnames";
-import { formatToMoney } from "@/utils/helpers";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { SyntheticEvent, useState } from "react";
 import Skeleton from "react-loading-skeleton";
+import { toast } from "react-toastify";
+
+import { OrderType } from "@/@types";
+import { formatToMoney } from "@/utils/helpers";
+import api from "@/utils/service";
 
 export default function OrdersForm() {
   const queryClient = useQueryClient();

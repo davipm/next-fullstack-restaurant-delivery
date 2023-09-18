@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import api from "@/utils/service";
 import { Product } from "@/@types";
 import DeleteButton from "@/components/DeleteButton";
 import Price from "@/components/Price";
+import api from "@/utils/service";
 
 async function getSingeProduct(id: string) {
   try {

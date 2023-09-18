@@ -2,8 +2,9 @@
 
 import cx from "classnames";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Categories } from "@/@types";
 import { useCallback } from "react";
+
+import { Categories } from "@/@types";
 
 interface Props {
   categories: Categories[];

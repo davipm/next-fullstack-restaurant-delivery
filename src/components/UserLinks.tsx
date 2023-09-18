@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { getCurrentUser } from "@/utils/auth";
+
 import LogoutBtn from "@/components/LogoutBtn";
+import { getCurrentUser } from "@/utils/auth";
 
 export default async function UserLinks() {
   const session = await getCurrentUser();

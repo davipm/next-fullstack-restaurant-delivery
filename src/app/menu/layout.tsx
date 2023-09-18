@@ -1,6 +1,6 @@
-import api from "@/utils/service";
 import { Categories, Props } from "@/@types";
 import ExploreMenu from "@/components/ExploreMenu";
+import api from "@/utils/service";
 
 async function getCategories() {
   try {

@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
-import methods from "@/classes";
 import { NextRequest } from "next/server";
+
+import methods from "@/classes";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,

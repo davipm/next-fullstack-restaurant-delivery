@@ -1,5 +1,5 @@
-import React, { InputHTMLAttributes } from "react";
 import Image from "next/image";
+import React, { InputHTMLAttributes } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;

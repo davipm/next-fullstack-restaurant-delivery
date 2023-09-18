@@ -1,16 +1,17 @@
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 
 import { Props } from "@/@types";
-import Notification from "@/components/Notification";
-import Navbar from "@/components/Navbar";
 import AuthProvider from "@/components/AuthProvider";
-import QueryProvider from "@/components/QueryProvider";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+import Notification from "@/components/Notification";
+import QueryProvider from "@/components/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

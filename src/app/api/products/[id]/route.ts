@@ -1,7 +1,8 @@
-import prisma from "@/utils/connect";
 import { NextRequest } from "next/server";
-import { getCurrentUser } from "@/utils/auth";
+
 import methods from "@/classes";
+import { getCurrentUser } from "@/utils/auth";
+import prisma from "@/utils/connect";
 
 interface Params {
   params: {

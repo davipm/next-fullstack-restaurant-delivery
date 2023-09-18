@@ -1,5 +1,5 @@
-import prisma from "@/utils/connect";
 import methods from "@/classes";
+import prisma from "@/utils/connect";
 
 export async function GET() {
   try {

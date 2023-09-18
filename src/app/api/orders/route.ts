@@ -1,8 +1,8 @@
 import { NextRequest } from "next/server";
 
+import methods from "@/classes";
 import { getCurrentUser } from "@/utils/auth";
 import prisma from "@/utils/connect";
-import methods from "@/classes";
 
 export async function GET() {
   const session = await getCurrentUser();

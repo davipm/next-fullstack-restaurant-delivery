@@ -1,7 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
-import { getCurrentUser } from "@/utils/auth";
+import Link from "next/link";
+
 import CartBtn from "@/components/CartBtn";
+import { getCurrentUser } from "@/utils/auth";
 
 export default async function CartIcon() {
   const session = await getCurrentUser();

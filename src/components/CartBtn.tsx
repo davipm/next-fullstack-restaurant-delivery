@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+
 import { useCartStore } from "@/utils/store";
 
 export default function CartBtn() {

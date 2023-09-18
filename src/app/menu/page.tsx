@@ -1,9 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
-import api from "@/utils/service";
-import { formatToMoney } from "@/utils/helpers";
 import { Product } from "@/@types";
+import { formatToMoney } from "@/utils/helpers";
+import api from "@/utils/service";
 
 interface Props {
   searchParams: {

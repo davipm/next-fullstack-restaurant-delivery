@@ -1,7 +1,8 @@
-import { redirect } from "next/navigation";
 import Image from "next/image";
-import { getCurrentUser } from "@/utils/auth";
+import { redirect } from "next/navigation";
+
 import LoginForm from "@/components/LoginForm";
+import { getCurrentUser } from "@/utils/auth";
 
 export default async function LoginPage() {
   const session = await getCurrentUser();

@@ -1,9 +1,9 @@
-import Link from "next/link";
 import Image from "next/image";
+import Link from "next/link";
 
+import CartIcon from "@/components/CartIcon";
 import Menu from "@/components/Menu";
 import UserLinks from "@/components/UserLinks";
-import CartIcon from "@/components/CartIcon";
 
 export default function Navbar() {
   return (

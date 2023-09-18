@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 import { Product } from "@/@types";
-import { useCartStore } from "@/utils/store";
-import { toast } from "react-toastify";
 import { formatToMoney } from "@/utils/helpers";
+import { useCartStore } from "@/utils/store";
 
 interface Props {
   product: Product;
