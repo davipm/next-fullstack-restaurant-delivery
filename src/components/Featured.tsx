@@ -9,7 +9,7 @@ async function getProductsFeatured() {
     const { data } = await api.get<Product[]>(`/products`);
     return data;
   } catch (error) {
-    throw new Error("Error trying get products");
+    throw new Error("Error trying get Featured Products");
   }
 }
 

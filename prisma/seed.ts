@@ -6,7 +6,7 @@ async function main() {
     update: {},
     create: {
       email: "davi.p.m94@gmail.com",
-      name: "avi",
+      name: "Davi Pereira",
     },
   });
   console.log(user);
