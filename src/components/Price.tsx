@@ -43,15 +43,11 @@ export default function Price({ product }: Props) {
   useEffect(() => {
     setItem((prevState) => {
       const basePrice = item.quantity * product.price;
-      const additionalPrice =
-        product.options?.length && product.options[item.selected]
-          ? parseInt(String(product.options[item.selected].additionalPrice))
-          : 0;
+      const additionalPrice = product.options?.length
+        ? parseInt(String(product.options[item.selected].additionalPrice))
+        : 0;
 
-      return {
-        ...prevState,
-        total: basePrice + additionalPrice,
-      };
+      return { ...prevState, total: basePrice + additionalPrice };
     });
   }, [item.quantity, item.selected, product]);
 

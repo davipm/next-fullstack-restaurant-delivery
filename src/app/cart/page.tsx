@@ -50,7 +50,6 @@ export default function Page() {
         userEmail: session?.user.email,
       }),
     onSuccess: ({ id }) => {
-      toast("The product has been deleted!");
       router.push(`/auth/pay/${id}`);
     },
     onError: () => {
