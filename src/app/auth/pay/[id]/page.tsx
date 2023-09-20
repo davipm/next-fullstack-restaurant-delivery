@@ -42,7 +42,9 @@ export default function PayPage({ params }: PayPageParams) {
   return (
     <div>
       {clientSecret && (
-        <Elements options={options} stripe={stripePromise}></Elements>
+        <Elements options={options} stripe={stripePromise}>
+          <p>Pay page</p>
+        </Elements>
       )}
     </div>
   );

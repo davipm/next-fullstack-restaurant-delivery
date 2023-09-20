@@ -35,7 +35,7 @@ export async function POST(req: NextRequest, { params }: Params) {
         data: { intent_id: paymentIntent.client_secret },
       });
 
-      methods.sendSuccess({ clientSecret: paymentIntent.client_secret });
+      return methods.sendSuccess({ clientSecret: paymentIntent.client_secret });
     }
   } catch (error) {
     return methods.sendInternalServerError();
