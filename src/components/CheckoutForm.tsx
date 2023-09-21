@@ -18,7 +18,7 @@ export default function CheckoutForm() {
   useEffect(() => {
     if (!stripe) return;
     const clientSecret = new URLSearchParams(window.location.search).get(
-      'payment_intent_client_secret"',
+      "payment_intent_client_secret",
     );
 
     if (!clientSecret) return;
@@ -51,7 +51,7 @@ export default function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/success",
+        return_url: "http://localhost:3000/auth/success",
       },
     });
 
