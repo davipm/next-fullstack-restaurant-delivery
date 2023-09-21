@@ -5,6 +5,7 @@ import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+import CheckoutForm from "@/components/CheckoutForm";
 import api from "@/utils/service";
 
 const stripePromise = loadStripe(
@@ -43,7 +44,7 @@ export default function PayPage({ params }: PayPageParams) {
     <div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <p>Pay page</p>
+          <CheckoutForm />
         </Elements>
       )}
     </div>

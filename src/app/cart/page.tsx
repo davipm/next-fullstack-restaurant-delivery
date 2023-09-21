@@ -1,6 +1,6 @@
 "use client";
 
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
@@ -38,6 +38,7 @@ async function makeCheckoutPost({ products, price, userEmail }: Props) {
 }
 
 export default function Page() {
+  const queryClient = useQueryClient();
   const { products, totalItems, totalPrice, removeFromCart } = useCartStore();
   const { data: session } = useSession();
   const router = useRouter();
@@ -49,7 +50,8 @@ export default function Page() {
         price: totalPrice,
         userEmail: session?.user.email,
       }),
-    onSuccess: ({ id }) => {
+    onSuccess: async ({ id }) => {
+      await queryClient.invalidateQueries({ queryKey: ["orders"] });
       router.push(`/auth/pay/${id}`);
     },
     onError: () => {
