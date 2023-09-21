@@ -41,14 +41,15 @@ export default function Price({ product }: Props) {
   }, []);
 
   useEffect(() => {
-    setItem((prevState) => ({
-      ...prevState,
-      total: product.options?.length
-        ? prevState.quantity * product.price +
-          parseInt(String(product.options[prevState.selected].additionalPrice))
-        : prevState.quantity * product.price,
-    }));
-  }, [product]);
+    setItem((prevState) => {
+      const basePrice = item.quantity * product.price;
+      const additionalPrice = product.options?.length
+        ? parseInt(String(product.options[item.selected].additionalPrice))
+        : 0;
+
+      return { ...prevState, total: basePrice + additionalPrice };
+    });
+  }, [item.quantity, item.selected, product]);
 
   return (
     <div className="flex flex-col gap-4">
