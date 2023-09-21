@@ -7,11 +7,11 @@ import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 
 import { Props } from "@/@types";
-import AuthProvider from "@/components/AuthProvider";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Notification from "@/components/Notification";
-import QueryProvider from "@/components/QueryProvider";
+import AuthProvider from "@/context/AuthProvider";
+import QueryProvider from "@/context/QueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
