@@ -8,6 +8,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 - zustand
 - psql
 - stripe
+- next-auth
 
 
 ## Getting Started
